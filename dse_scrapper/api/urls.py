@@ -7,4 +7,5 @@ urlpatterns = [
     path('top_gainer', views.topGainer, name='top_gainer'),
     path('top_loser', views.topLoser, name='top_loser'),
     path('circuit_breaker/', views.circuitBreaker, name='circuit_breaker'),
+    path('listed_companies/', views.listedCompanies, name='listed_companies'),
 ]

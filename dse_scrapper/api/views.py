@@ -1,6 +1,6 @@
 from django.http import HttpResponse
 
-from .scrap_data import getStockRecords, getCircuitBreakerRecords, getTopGainerRecords, getTopLooserRecords
+from .scrap_data import getStockRecords, getCircuitBreakerRecords, getTopGainerRecords, getTopLooserRecords, getListedCompanies
 
 def index(request):
     queryprms = request.GET
@@ -26,5 +26,10 @@ def topGainer(request):
 
 def topLoser(request):
     dseData = getTopLooserRecords()
+    # print(dseData)
+    return HttpResponse(dseData)
+
+def listedCompanies(request):
+    dseData = getListedCompanies()
     # print(dseData)
     return HttpResponse(dseData)

@@ -58,6 +58,13 @@ Dhaka Stock Exchange data scraper is a experimental Django & Python project whic
   GET /api/circuit_breaker
 ```
 
+#### Get All Listed Companies Data
+
+```http
+  GET /api/listed_companies
+```
+
+
 
 ## Authors
 
