@@ -256,7 +256,7 @@ def getListedCompanies():
             if(companies_tc[i].text != "More..."):
                 # print(companies_tc[i].text, '-', companies_tc[i+1].text.strip("()"))
                 allRecordData.append(
-                    {'trade_code': companies_tc[i].text, 'trade_name': companies_tc[i+1].text.strip("()").capitalize()})
+                    {'trade_code': companies_tc[i].text, 'trade_name': companies_tc[i+1].text.strip("()").title()})
             i += 2
 
     return allRecordData
