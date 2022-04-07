@@ -12,22 +12,22 @@ def index(request):
         dseData = getStockRecords()
 
     # print(dseData)
-    return HttpResponse(dseData)
+    return JsonResponse(dseData, safe=False)
 
 def circuitBreaker(request):
     dseData = getCircuitBreakerRecords()
     # print(dseData)
-    return HttpResponse(dseData)
+    return JsonResponse(dseData, safe=False)
 
 def topGainer(request):
     dseData = getTopGainerRecords()
     # print(dseData)
-    return HttpResponse(dseData)
+    return JsonResponse(dseData, safe=False)
 
 def topLoser(request):
     dseData = getTopLooserRecords()
     # print(dseData)
-    return HttpResponse(dseData)
+    return JsonResponse(dseData, safe=False)
 
 def listedCompanies(request):
     dseData = getListedCompanies()

@@ -35,10 +35,6 @@ def getStockRecords(filter = 'default'):
     tableHeader = tableRows[0].find_all('th')
 
     headerInfo = ['trading_code', 'ltp', 'high', 'low', 'closep', 'ycp', 'change', 'trade', 'value', 'volume']
-    # for th in tableHeader:
-    #     headerInfo.append(th.text.strip())
-    # print(headerInfo)
-    # exit()
 
     allInfo = []
 
@@ -56,7 +52,7 @@ def getStockRecords(filter = 'default'):
     df = pd.DataFrame(allInfo)
     df.columns = headerInfo
 
-    return df.to_json(orient='records')
+    return df.to_dict(orient='records')
 
 
 def getCircuitBreakerRecords():
@@ -96,7 +92,7 @@ def getCircuitBreakerRecords():
     df = pd.DataFrame(allInfo)
     df.columns = headerInfo
 
-    return df.to_json(orient='records')
+    return df.to_dict(orient='records')
 
 
 def getTopGainerRecords():
@@ -116,7 +112,7 @@ def getTopGainerRecords():
     cpy_table_rows = rightContainer[0].find_all('tr')
     opl_table_rows = rightContainer[1].find_all('tr')
 
-    allRecords = {};
+    allRecords = {}
 
     all_cpy_Info = []
 
@@ -158,10 +154,7 @@ def getTopGainerRecords():
     
     allRecords.update({'olp': df.to_dict(orient='records')})
 
-    app_json = json.dumps(allRecords)
-
-    # print(app_json)
-    return app_json
+    return allRecords
 
 
 def getTopLooserRecords():
@@ -223,10 +216,7 @@ def getTopLooserRecords():
 
     allRecords.update({'olp': df.to_dict(orient='records')})
 
-    app_json = json.dumps(allRecords)
-
-    # print(app_json)
-    return app_json
+    return allRecords
 
 
 def getListedCompanies():
