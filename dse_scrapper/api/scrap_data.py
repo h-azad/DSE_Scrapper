@@ -237,46 +237,26 @@ def getListedCompanies():
 
     html = list(soup.children)[2]
 
-    body = list(html.children)[4]
+    # body = list(html.children)[4]
 
     rightContainer = soup.find(id="RightBody")
 
     company_categories = rightContainer.find(id = "top")
     company_categories = company_categories.find_all('a', attrs={"name" : "_top"})
 
-    allRecordsTC = []
-    allRecordsTN = []
+    allRecordData = []
 
     for cmpc in company_categories:
         c_companies = rightContainer.find(id=cmpc.text)
+        companies_tc = c_companies.find_all(
+            ['a', 'span'], class_=lambda x: x not in ['showClass'])
+        i = 1
+        n = len(companies_tc[1:])
+        while(i <= n):
+            if(companies_tc[i].text != "More..."):
+                # print(companies_tc[i].text, '-', companies_tc[i+1].text.strip("()"))
+                allRecordData.append(
+                    {'trade_code': companies_tc[i].text, 'trade_name': companies_tc[i+1].text.strip("()").capitalize()})
+            i += 2
 
-        companies_tc = c_companies.find_all('a')
-        companies_tc = list(companies_tc)
-        companies_tn = c_companies.find_all('span')
-        companies_tn = list(companies_tn)
-
-        companyInfo = {}
-        
-        for idx, cmp in enumerate(companies_tc):
-            iData = [];
-
-            if(idx != 0):
-                if(cmp.text != "More..."):
-                    iData.append(cmp.text)
-                    print(cmp.text, idx)
-
-                    if idx in dict(enumerate(companies_tn)):
-                        iData.append(companies_tn[idx].text.strip('()'))
-                    else:
-                        iData.append("N/A")
-                allRecordsTC.append(iData)
-
-    df = pd.DataFrame(allRecordsTC)
-    df.columns = ['trade_code', 'name']
-    print(df)
-    return df.to_json(orient='records')
-    print(len(allRecordsTN), len(allRecordsTC))
-    # app_json = json.dumps(allRecordsTC)
-
-    # # print(app_json)
-    # return app_json
+    return allRecordData

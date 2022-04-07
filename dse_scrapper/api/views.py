@@ -1,4 +1,4 @@
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 
 from .scrap_data import getStockRecords, getCircuitBreakerRecords, getTopGainerRecords, getTopLooserRecords, getListedCompanies
 
@@ -32,4 +32,4 @@ def topLoser(request):
 def listedCompanies(request):
     dseData = getListedCompanies()
     # print(dseData)
-    return HttpResponse(dseData)
+    return JsonResponse(dseData, safe=False)
